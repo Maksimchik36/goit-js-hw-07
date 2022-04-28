@@ -33,3 +33,11 @@ import { galleryItems } from './gallery-items.js';
 // Добавь закрытие модального окна по нажатию клавиши Escape. Сделай так, чтобы прослушивание клавиатуры было только пока открыто модальное окно. У библиотеки basicLightbox есть метод для программного закрытия модального окна.
 
 console.log(galleryItems);
+
+const galleryRef = document.querySelector(".gallery");
+
+const itemsWithProperties = galleryItems.map((item) => {
+    document.createElement("div");
+    
+})
+console.log("itemsWithProperties", itemsWithProperties);
