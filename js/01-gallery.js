@@ -32,12 +32,44 @@ import { galleryItems } from './gallery-items.js';
 
 // Добавь закрытие модального окна по нажатию клавиши Escape. Сделай так, чтобы прослушивание клавиатуры было только пока открыто модальное окно. У библиотеки basicLightbox есть метод для программного закрытия модального окна.
 
-console.log(galleryItems);
+// console.log(galleryItems);
 
+// 1. Создание и рендер разметки по массиву данных galleryItems и предоставленному шаблону элемента галереи.
+ 
 const galleryRef = document.querySelector(".gallery");
 
+// Поэлементно перебирает старый массив и создает элементы для нового массива с необходимой разметкой
 const itemsWithProperties = galleryItems.map((item) => {
-    document.createElement("div");
-    
+    const newElement = `<div class="gallery__item">
+  <a class="gallery__link" href="${item.original}">
+     <img
+       class="gallery__image"
+       src="${item.preview}"
+       data-source="${item.original}"
+       alt="${item.description}"
+     />
+   </a>
+ </div >`;
+    return newElement;
 })
-console.log("itemsWithProperties", itemsWithProperties);
+
+// Делает из массива строку
+const markup = itemsWithProperties.join("");
+// Интегрирует строку в GalleryRef
+galleryRef.innerHTML = markup;
+
+
+// 2. Реализация делегирования на div.gallery и получение url большого изображения.
+
+galleryRef.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    if (event.target.nodeName !== 'IMG') {
+        return;
+    }
+
+    event.target.src = event.target.dataset.source;
+    console.log("event.target", event.target);;
+    console.log("event.currentTarget", event.currentTarget);
+    // return event.target;
+});
