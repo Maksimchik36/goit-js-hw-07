@@ -61,15 +61,20 @@ galleryRef.innerHTML = markup;
 
 // 2. Реализация делегирования на div.gallery и получение url большого изображения.
 
-galleryRef.addEventListener("click", (event) => {
+galleryRef.addEventListener("click", onImageClick);
+
+function onImageClick(event){
     event.preventDefault();
 
     if (event.target.nodeName !== 'IMG') {
         return;
     }
 
-    event.target.src = event.target.dataset.source;
+    // event.target.src = event.target.dataset.source;
     console.log("event.target", event.target);;
     console.log("event.currentTarget", event.currentTarget);
     // return event.target;
-});
+}
+
+
+// 3. Подключение скрипта и стилей библиотеки модального окна basicLightbox. Используй CDN сервис jsdelivr и добавь в проект ссылки на минифицированные (.min) файлы библиотеки.
