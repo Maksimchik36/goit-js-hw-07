@@ -69,12 +69,37 @@ function onImageClick(event){
     if (event.target.nodeName !== 'IMG') {
         return;
     }
+    
+    // 4. Открытие модального окна по клику на элементе галереи. Для этого ознакомься с документацией и примерами.
+    // 5. Замена значения атрибута src элемента <img> в модальном окне перед открытием. Используй готовую разметку модального окна с изображением из примеров библиотеки basicLightbox.
 
-    // event.target.src = event.target.dataset.source;
-    console.log("event.target", event.target);;
-    console.log("event.currentTarget", event.currentTarget);
-    // return event.target;
+    const instance = basicLightbox.create(`
+    <img src=${event.target.dataset.source}>`, {
+    closable: true,
+    // onShow: (instance) => { window.addEventListener('keydown', onModalPressEsc) },
+    // onClose: (instance) => {window.removeEventListener('keydown', onModalPressEsc)},
+    })
+    
+    instance.show()
 }
 
 
+
+// document.addEventListener("keydown", event =>{
+//   console.log("keydown", event);
+// })// keydown KeyboardEvent {isTrusted: true, key: 'Escape', code: 'Escape', location: 0, ctrlKey: false, …}
+
+
+
 // 3. Подключение скрипта и стилей библиотеки модального окна basicLightbox. Используй CDN сервис jsdelivr и добавь в проект ссылки на минифицированные (.min) файлы библиотеки.
+
+// Добавил  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css"> в html в head.
+
+// Добавил <script src="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js"></script> в конец body перед другими скриптами.
+
+
+
+
+
+
+
