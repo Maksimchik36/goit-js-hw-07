@@ -73,17 +73,23 @@ function onImageClick(event){
     // 4. Открытие модального окна по клику на элементе галереи. Для этого ознакомься с документацией и примерами.
     // 5. Замена значения атрибута src элемента <img> в модальном окне перед открытием. Используй готовую разметку модального окна с изображением из примеров библиотеки basicLightbox.
 
-    const instance = basicLightbox.create(`
+    const modal = basicLightbox.create(`
     <img src=${event.target.dataset.source}>`, {
     closable: true,
-    // onShow: (instance) => { window.addEventListener('keydown', onModalPressEsc) },
-    // onClose: (instance) => {window.removeEventListener('keydown', onModalPressEsc)},
+    onShow: (modal) => { window.addEventListener('keydown', onModalPressEsc) },
+    onClose: (modal) => {window.removeEventListener('keydown', onModalPressEsc)},
     })
     
-    instance.show()
+        modal.show();
 }
 
-
+const onModalPressEsc = (modal)=>{
+  console.log(event.code);
+  if(event.code === "Escape"){
+    console.log("zakrit");
+    modal.close();
+  }
+}
 
 // document.addEventListener("keydown", event =>{
 //   console.log("keydown", event);
