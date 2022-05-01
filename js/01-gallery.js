@@ -38,8 +38,8 @@ import { galleryItems } from './gallery-items.js';
  
 const galleryRef = document.querySelector(".gallery");
 
-// Поэлементно перебирает старый массив и создает элементы для нового массива с необходимой разметкой
-const itemsWithProperties = galleryItems.map((item) => {
+// Поэлементно перебирает старый массив и создает элементы для нового массива с необходимой разметкой и выдаёт строку разметки
+function createMarkup(array){ return array.map((item) => {
     const newElement = `<div class="gallery__item">
   <a class="gallery__link" href="${item.original}">
      <img
@@ -51,13 +51,15 @@ const itemsWithProperties = galleryItems.map((item) => {
    </a>
  </div >`;
     return newElement;
-})
+}).join("")
+}
 
-// Делает из массива строку
-const markup = itemsWithProperties.join("");
-// Интегрирует строку в GalleryRef
-galleryRef.innerHTML = markup;
+//Создаёт галерею, преобразуя строку
+function createGallery(parent, array){
+  return parent.innerHTML = createMarkup(array);
+}
 
+createGallery(galleryRef, galleryItems);
 
 // 2. Реализация делегирования на div.gallery и получение url большого изображения.
 
@@ -76,21 +78,21 @@ function onImageClick(event){
     const modal = basicLightbox.create(`
     <img src=${event.target.dataset.source}>`, {
     closable: true,
-    onShow: (modal) => { window.addEventListener('keydown', onModalPressEsc) },
-    onClose: (modal) => {window.removeEventListener('keydown', onModalPressEsc)},
+    // onShow: (modal) => { window.addEventListener('keydown', onModalPressEsc) },
+    // onClose: (modal) => {window.removeEventListener('keydown', onModalPressEsc)},
     })
     
         modal.show();
        
 }
 
-const onModalPressEsc = (modal)=>{
-  console.log(event.code);
-   if(modal.visible() && event.code === "Escape"){
-    console.log("zakrit");
-    modal.close();
-  }
-}
+// function onModalPressEsc(event){
+//   console.log(event.code);
+//    if(event.code === "Escape"){
+//     console.log("zakrit");
+//     modal.close();
+//   }
+// }
 
 // document.addEventListener("keydown", event =>{
 //   console.log("keydown", event);
