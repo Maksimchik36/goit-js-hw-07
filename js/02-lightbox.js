@@ -17,4 +17,37 @@ import { galleryItems } from './gallery-items.js';
 // 4. Посмотри в документации секцию «Options» и добавь отображение подписей к изображениям из атрибута alt. Пусть подпись будет снизу и появляется через 250 миллисекунд после открытия изображения.
 
 
-console.log(galleryItems);
+// console.log(galleryItems);
+
+const galleryRef = document.querySelector(".gallery");
+
+// Создает строку разметки из исходного массива
+const createMarkup = (array) => {return array.map((item)=> {
+    const newElement = `<a class="gallery__item" href="${item.original}">
+<img class="gallery__image" src="${item.preview}" alt="${item.description}" />
+</a>`;
+return newElement;}).join("")}
+
+//Создаёт галерею, преобразуя строку
+function createGallery(parent, array){
+   return parent.innerHTML = createMarkup(array);
+}
+
+createGallery(galleryRef, galleryItems);
+
+galleryRef.addEventListener("click", onImageClick);
+
+// Открывает модальное окно при клике на картинку
+function onImageClick(event){
+    event.preventDefault();
+console.log("event.target", event.target);
+    if (event.target.nodeName !== 'IMG'){
+            return;
+    }
+    openModal();
+}
+
+function openModal(){
+    const lightbox = new SimpleLightbox('.gallery a', {captionsData:'alt', captionDelay: 250});
+    return lightbox;
+}

@@ -81,11 +81,12 @@ function onImageClick(event){
     })
     
         modal.show();
+       
 }
 
 const onModalPressEsc = (modal)=>{
   console.log(event.code);
-  if(event.code === "Escape"){
+   if(modal.visible() && event.code === "Escape"){
     console.log("zakrit");
     modal.close();
   }
