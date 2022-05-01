@@ -78,27 +78,18 @@ function onImageClick(event){
     const modal = basicLightbox.create(`
     <img src=${event.target.dataset.source}>`, {
     closable: true,
-    // onShow: (modal) => { window.addEventListener('keydown', onModalPressEsc) },
-    // onClose: (modal) => {window.removeEventListener('keydown', onModalPressEsc)},
+    onShow: (modal) => { window.addEventListener('keydown', onModalPressEsc) },
+    onClose: (modal) => {window.removeEventListener('keydown', onModalPressEsc)},
     })
     
         modal.show();
-       
+
+        function onModalPressEsc(event){
+          if(event.code === "Escape"){
+                  modal.close();
+          }
+        }
 }
-
-// function onModalPressEsc(event){
-//   console.log(event.code);
-//    if(event.code === "Escape"){
-//     console.log("zakrit");
-//     modal.close();
-//   }
-// }
-
-// document.addEventListener("keydown", event =>{
-//   console.log("keydown", event);
-// })// keydown KeyboardEvent {isTrusted: true, key: 'Escape', code: 'Escape', location: 0, ctrlKey: false, …}
-
-
 
 // 3. Подключение скрипта и стилей библиотеки модального окна basicLightbox. Используй CDN сервис jsdelivr и добавь в проект ссылки на минифицированные (.min) файлы библиотеки.
 
